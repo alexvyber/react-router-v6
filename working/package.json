@@ -1,0 +1,28 @@
+{
+  "name": "working",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "concurrently \"vite\" \"json-server --watch json-server/db.json --port 5000 --delay 1000 --routes json-server/routes.json\"",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.10.6",
+    "history": "^5.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react-swc": "^3.2.0",
+    "concurrently": "^7.6.0",
+    "json-server": "^0.17.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}
