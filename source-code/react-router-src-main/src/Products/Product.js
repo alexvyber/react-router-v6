@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { css } from '@emotion/css';
-
-import { retrieveProduct } from './ProductsService';
+import { retrieveProduct } from "./ProductsService"
+import { css } from "@emotion/css"
+import React, { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 
 const ProductStyles = css`
   color: #fff;
@@ -41,27 +40,27 @@ const ProductStyles = css`
       text-transform: uppercase;
     }
   }
-`;
+`
 
 const Product = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [product, setProduct] = useState(null)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
-        const product = await retrieveProduct(id);
-        setProduct(product);
+        const product = await retrieveProduct(id)
+        setProduct(product)
       } catch (e) {
-        console.warn(e);
-        navigate('/', { replace: true, state: { id } });
+        console.warn(e)
+        navigate("/", { replace: true, state: { id } })
       }
-    })();
-  }, [id]);
+    })()
+  }, [id])
 
   if (product === null) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -79,16 +78,12 @@ const Product = () => {
       </div>
       <div className="Product-Description">
         <p>{product.description}</p>
-        <button
-          type="button"
-          className="Product-Button"
-          onClick={() => navigate(-1)}
-        >
+        <button type="button" className="Product-Button" onClick={() => navigate(-1)}>
           Back
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

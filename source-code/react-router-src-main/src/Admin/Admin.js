@@ -1,13 +1,12 @@
-import React, { lazy } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import { css } from '@emotion/css';
-
 // import ProductEdit from '../Products/ProductEdit';
 // import ProductsIndex from '../Products/ProductsIndex';
-import Loadable from '../Common/Loadable';
+import Loadable from "../Common/Loadable"
+import { css } from "@emotion/css"
+import React, { lazy } from "react"
+import { Routes, Route, Link } from "react-router-dom"
 
-const ProductEdit = Loadable(lazy(() => import('../Products/ProductEdit')));
-const ProductsIndex = Loadable(lazy(() => import('../Products/ProductsIndex')));
+const ProductEdit = Loadable(lazy(() => import("../Products/ProductEdit")))
+const ProductsIndex = Loadable(lazy(() => import("../Products/ProductsIndex")))
 
 const AdminStyles = css`
   .Admin {
@@ -26,7 +25,7 @@ const AdminStyles = css`
       margin-left: auto;
     }
   }
-`;
+`
 
 const Admin = () => (
   <div className={AdminStyles}>
@@ -43,6 +42,6 @@ const Admin = () => (
       <Route path="/:id" element={<ProductEdit isEdit={true} />} />
     </Routes>
   </div>
-);
+)
 
-export default Admin;
+export default Admin

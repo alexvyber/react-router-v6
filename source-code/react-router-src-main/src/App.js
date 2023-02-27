@@ -1,16 +1,16 @@
-import React, { lazy, useState } from 'react';
-import { BrowserRouter as Router, Navigate, useRoutes } from 'react-router-dom';
-import { css } from '@emotion/css';
+import Loadable from "./Common/Loadable"
+import Nav from "./Common/Nav"
+import ScrollToTop from "./Common/ScrollToTop"
+import { css } from "@emotion/css"
+import React, { lazy, useState } from "react"
+import { BrowserRouter as Router, Navigate, useRoutes } from "react-router-dom"
 
-import Nav from './Common/Nav';
-import Loadable from './Common/Loadable';
-import ScrollToTop from './Common/ScrollToTop';
 // import ProtectedRoute from './Common/ProtectedRoute';
 // import Products from './Products/Products';
 // import Admin from './Admin/Admin';
 
-const Products = Loadable(lazy(() => import('./Products/Products')));
-const Admin = Loadable(lazy(() => import('./Admin/Admin')));
+const Products = Loadable(lazy(() => import("./Products/Products")))
+const Admin = Loadable(lazy(() => import("./Admin/Admin")))
 
 const AppStyles = css`
   margin: 50px auto;
@@ -21,27 +21,27 @@ const AppStyles = css`
     border-radius: 6px;
     padding: 25px;
   }
-`;
+`
 
 const App = () => {
-  const [authenticated] = useState(true);
+  const [authenticated] = useState(true)
   const routes = useRoutes([
     {
-      path: '/*',
+      path: "/*",
       element: <Products />,
     },
     {
-      path: '/admin*',
+      path: "/admin*",
       element: authenticated ? <Admin /> : <Navigate to="/" />,
     },
     {
-      path: '*',
+      path: "*",
       element: <Navigate to="/" />,
     },
-  ]);
+  ])
 
-  return routes;
-};
+  return routes
+}
 
 const AppWrapper = () => (
   <div className={AppStyles}>
@@ -53,6 +53,6 @@ const AppWrapper = () => (
       </div>
     </Router>
   </div>
-);
+)
 
-export default AppWrapper;
+export default AppWrapper

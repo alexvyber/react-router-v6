@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { css } from '@emotion/css';
-
-import ProductCard from './ProductCard';
-
-import { listProducts } from './ProductsService';
+import ProductCard from "./ProductCard"
+import { listProducts } from "./ProductsService"
+import { css } from "@emotion/css"
+import React, { useState, useEffect } from "react"
+import { useLocation, useSearchParams } from "react-router-dom"
 
 const ProductsIndexStyles = css`
   .ProductsIndex {
@@ -27,60 +25,60 @@ const ProductsIndexStyles = css`
       }
     }
   }
-`;
+`
 
 const ProductsIndex = () => {
-  const { state } = useLocation();
-  const [products, setProducts] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { state } = useLocation()
+  const [products, setProducts] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     if (state) {
-      console.warn(`Nothing found for ${state.id}`);
+      console.warn(`Nothing found for ${state.id}`)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    (async () => {
-      const data = await listProducts();
-      const params = Object.fromEntries([...searchParams]);
-      sortProductsFromParams(data, params);
-    })();
-  }, []);
+    ;(async () => {
+      const data = await listProducts()
+      const params = Object.fromEntries([...searchParams])
+      sortProductsFromParams(data, params)
+    })()
+  }, [])
 
   const sortProductsFromParams = (data, params) => {
     if (!Object.keys(params).length) {
-      setProducts(data);
-      return;
+      setProducts(data)
+      return
     }
 
     const sorted = [...data].sort((x, y) => {
-      const { sort, order } = params;
+      const { sort, order } = params
       switch (order) {
-        case 'ascending': {
-          return x[sort] > y[sort] ? 1 : -1;
+        case "ascending": {
+          return x[sort] > y[sort] ? 1 : -1
         }
-        case 'descending': {
-          return x[sort] < y[sort] ? 1 : -1;
+        case "descending": {
+          return x[sort] < y[sort] ? 1 : -1
         }
         default: {
-          return 0;
+          return 0
         }
       }
-    });
-    setProducts(sorted);
-  };
+    })
+    setProducts(sorted)
+  }
 
-  const updateParams = (e) => {
-    const { name, value } = e.target;
-    const currentParams = Object.fromEntries([...searchParams]);
-    const newParams = { ...currentParams, [name]: value };
-    setSearchParams(newParams);
-    sortProductsFromParams(products, newParams);
-  };
+  const updateParams = e => {
+    const { name, value } = e.target
+    const currentParams = Object.fromEntries([...searchParams])
+    const newParams = { ...currentParams, [name]: value }
+    setSearchParams(newParams)
+    sortProductsFromParams(products, newParams)
+  }
 
   if (products === null) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -94,7 +92,7 @@ const ProductsIndex = () => {
             name="sort"
             value="name"
             onChange={updateParams}
-            defaultChecked={searchParams.get('sort') === 'name'}
+            defaultChecked={searchParams.get("sort") === "name"}
           />
         </label>
         <label>
@@ -104,7 +102,7 @@ const ProductsIndex = () => {
             name="sort"
             value="price"
             onChange={updateParams}
-            defaultChecked={searchParams.get('sort') === 'price'}
+            defaultChecked={searchParams.get("sort") === "price"}
           />
         </label>
       </div>
@@ -117,7 +115,7 @@ const ProductsIndex = () => {
             name="order"
             value="ascending"
             onChange={updateParams}
-            defaultChecked={searchParams.get('order') === 'ascending'}
+            defaultChecked={searchParams.get("order") === "ascending"}
           />
         </label>
         <label>
@@ -127,17 +125,17 @@ const ProductsIndex = () => {
             name="order"
             value="descending"
             onChange={updateParams}
-            defaultChecked={searchParams.get('order') === 'descending'}
+            defaultChecked={searchParams.get("order") === "descending"}
           />
         </label>
       </div>
       <div className="ProductsIndex-List">
-        {products.map((item) => (
+        {products.map(item => (
           <ProductCard product={item} key={item.id} />
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductsIndex;
+export default ProductsIndex

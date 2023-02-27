@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { css } from '@emotion/css';
+import { css } from "@emotion/css"
+import React from "react"
+import { Link } from "react-router-dom"
 
 const ProductCardStyles = css`
   display: flex;
@@ -10,8 +10,7 @@ const ProductCardStyles = css`
   text-decoration: none;
   padding: 15px;
   margin-bottom: 5px;
-  transition: transform 0.1s ease-in-out, background 0.1s ease-in-out,
-    box-shadow 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
   &:hover {
     transform: translate(0, -3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.035);
@@ -31,7 +30,7 @@ const ProductCardStyles = css`
       margin: 0;
     }
   }
-`;
+`
 
 const ProductCard = ({ product }) => (
   <Link to={product.id} className={ProductCardStyles}>
@@ -45,6 +44,6 @@ const ProductCard = ({ product }) => (
       <p className="ProductCard-Price">{`$${product.price / 100}`}</p>
     </div>
   </Link>
-);
+)
 
-export default ProductCard;
+export default ProductCard

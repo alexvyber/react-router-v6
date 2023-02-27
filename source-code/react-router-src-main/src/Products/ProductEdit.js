@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { css } from '@emotion/css';
-
-import {
-  createProduct,
-  retrieveProduct,
-  updateProduct,
-  deleteProduct,
-} from './ProductsService';
+import { createProduct, retrieveProduct, updateProduct, deleteProduct } from "./ProductsService"
+import { css } from "@emotion/css"
+import React, { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 
 const ProductEditStyles = css`
   color: #fff;
@@ -44,75 +38,75 @@ const ProductEditStyles = css`
       text-transform: uppercase;
     }
   }
-`;
+`
 
 const ProductEdit = ({ isEdit }) => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [form, setForm] = useState(null);
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [form, setForm] = useState(null)
 
   useEffect(() => {
     if (!isEdit) {
       setForm({
-        id: '',
-        name: '',
+        id: "",
+        name: "",
         price: 0,
-        description: '',
-      });
-      return;
+        description: "",
+      })
+      return
     }
 
-    (async () => {
+    ;(async () => {
       try {
-        const product = await retrieveProduct(id);
-        setForm(product);
+        const product = await retrieveProduct(id)
+        setForm(product)
       } catch (e) {
-        console.warn(e);
-        navigate(`/admin`, { replace: true });
+        console.warn(e)
+        navigate(`/admin`, { replace: true })
       }
-    })();
-  }, [id]);
+    })()
+  }, [id])
 
   const updateField = ({ name, value }) => {
     setForm({
       ...form,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleCreate = async () => {
     try {
-      const { id } = await createProduct(form);
-      navigate(`/admin/${id}`);
+      const { id } = await createProduct(form)
+      navigate(`/admin/${id}`)
     } catch (e) {
-      console.warn(e);
+      console.warn(e)
     }
-  };
+  }
 
   const handleUpdate = async () => {
     try {
-      await updateProduct(form);
-      alert(`Updated ${form.name}`);
-      navigate(`/admin`);
+      await updateProduct(form)
+      alert(`Updated ${form.name}`)
+      navigate(`/admin`)
     } catch (e) {
-      console.warn(e);
+      console.warn(e)
     }
-  };
+  }
 
   const handleDelete = async () => {
     if (!window.confirm(`Really delete ${form.name}?`)) {
-      return;
+      return
     }
     try {
-      await deleteProduct(form.id);
-      navigate(`/admin`);
+      await deleteProduct(form.id)
+      navigate(`/admin`)
     } catch (e) {
-      console.warn(e);
+      console.warn(e)
     }
-  };
+  }
 
   if (form === null) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -151,36 +145,24 @@ const ProductEdit = ({ isEdit }) => {
         onChange={({ target }) => updateField(target)}
       />
       {!isEdit && (
-        <button
-          type="button"
-          className="ProductEdit-Button"
-          onClick={handleCreate}
-        >
+        <button type="button" className="ProductEdit-Button" onClick={handleCreate}>
           Create
         </button>
       )}
 
       {isEdit && (
-        <button
-          type="button"
-          className="ProductEdit-Button"
-          onClick={handleUpdate}
-        >
+        <button type="button" className="ProductEdit-Button" onClick={handleUpdate}>
           Update
         </button>
       )}
 
       {isEdit && (
-        <button
-          type="button"
-          className="ProductEdit-Button"
-          onClick={handleDelete}
-        >
+        <button type="button" className="ProductEdit-Button" onClick={handleDelete}>
           Delete
         </button>
       )}
     </form>
-  );
-};
+  )
+}
 
-export default ProductEdit;
+export default ProductEdit

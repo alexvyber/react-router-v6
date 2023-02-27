@@ -1,13 +1,12 @@
-import React, { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { css } from '@emotion/css';
-
 // import Product from './Product';
 // import ProductsIndex from './ProductsIndex';
-import Loadable from '../Common/Loadable';
+import Loadable from "../Common/Loadable"
+import { css } from "@emotion/css"
+import React, { lazy } from "react"
+import { Routes, Route } from "react-router-dom"
 
-const Product = Loadable(lazy(() => import('./Product')));
-const ProductsIndex = Loadable(lazy(() => import('./ProductsIndex')));
+const Product = Loadable(lazy(() => import("./Product")))
+const ProductsIndex = Loadable(lazy(() => import("./ProductsIndex")))
 
 const ProductsStyles = css`
   display: flex;
@@ -16,7 +15,7 @@ const ProductsStyles = css`
     width: 125px;
     margin: 0 auto 25px;
   }
-`;
+`
 
 const Products = () => (
   <div className={ProductsStyles}>
@@ -26,6 +25,6 @@ const Products = () => (
       <Route path=":id" element={<Product />} />
     </Routes>
   </div>
-);
+)
 
-export default Products;
+export default Products

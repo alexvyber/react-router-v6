@@ -1,50 +1,50 @@
-import path from 'path';
-import webpack from 'webpack';
-import HtmlPlugin from 'html-webpack-plugin';
-import ESLintPlugin from 'eslint-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
+import CopyPlugin from "copy-webpack-plugin"
+import ESLintPlugin from "eslint-webpack-plugin"
+import HtmlPlugin from "html-webpack-plugin"
+import path from "path"
+import webpack from "webpack"
 
 const config = (env, { mode }) => ({
-  target: 'web',
-  devtool: 'source-map',
-  entry: path.resolve(__dirname, './src/index.js'),
+  target: "web",
+  devtool: "source-map",
+  entry: path.resolve(__dirname, "./src/index.js"),
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ["babel-loader"],
       },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ["*", ".js", ".jsx"],
   },
   output: {
     clean: true,
-    publicPath: '/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[id].[contenthash].js',
-    path: path.resolve(__dirname, './build'),
+    publicPath: "/",
+    filename: "[name].bundle.js",
+    chunkFilename: "[id].[contenthash].js",
+    path: path.resolve(__dirname, "./build"),
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ESLintPlugin({
-      extensions: ['js'],
+      extensions: ["js"],
     }),
     new HtmlPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html'),
+      template: path.resolve(__dirname, "public", "index.html"),
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: 'public',
+          from: "public",
           globOptions: {
-            ignore: ['**/index.html'],
+            ignore: ["**/index.html"],
           },
         },
       ],
@@ -54,10 +54,10 @@ const config = (env, { mode }) => ({
     port: 3000,
     hot: true,
     historyApiFallback: true,
-    contentBase: 'public',
+    contentBase: "public",
     watchContentBase: true,
     proxy: {
-      '/api': 'http://localhost:5000',
+      "/api": "http://localhost:5000",
     },
     stats: {
       colors: true,
@@ -77,6 +77,6 @@ const config = (env, { mode }) => ({
       overlay: true,
     },
   },
-});
+})
 
-export default config;
+export default config
